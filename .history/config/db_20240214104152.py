@@ -2,7 +2,7 @@
 POSTGRESQL = {
   'default': {
     'ENGINE': 'django.db.backends.postgresql',
-    'NAME': 'smartHunt2',
+    'NAME': 'smartHunt2.db',
     'USER': 'postgres',
     'PASSWORD': 'Tecnico+123',
     'HOST': 'localhost',
