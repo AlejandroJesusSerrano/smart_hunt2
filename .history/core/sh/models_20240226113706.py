@@ -132,7 +132,7 @@ class Office(models.Model):
   date_updated = models.DateTimeField(auto_now_add = True, verbose_name = 'Última Modificación')
 
   def __str__(self):
-    return self.office
+    return f'{self.office} - {self.city}'
 
   class Meta:
     verbose_name = 'Officina'
@@ -199,7 +199,7 @@ class ImgPrinterDevice(models.Model):
   date_updated = models.DateTimeField(auto_now_add = True, verbose_name = 'Última Modificación')
 
   def __str__(self):
-    return self.ip
+    return self.model
 
   def computer_data(self):
     return f'{self.ip}, {self.model}'

@@ -12,7 +12,6 @@ admin.site.register(Computer)
 admin.site.register(Techs)
 
 # Dependencias y oficinas
-admin.site.register(Province)
 admin.site.register(Location)
 admin.site.register(Dependency)
 admin.site.register(Edifice)
