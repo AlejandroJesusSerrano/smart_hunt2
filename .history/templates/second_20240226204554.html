@@ -1,0 +1,14 @@
+{% extends 'index.html' %}
+
+<p>
+  {{ name }}
+</p>
+
+<ul>
+{% for m in marca %}
+  <ul>
+    <li>
+      {{m.id}}/ {{m.brand}}
+    </li>
+{% endfor %}
+</ul>

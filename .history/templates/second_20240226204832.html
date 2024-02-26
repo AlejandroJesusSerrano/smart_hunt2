@@ -1,0 +1,24 @@
+{% extends 'index.html' %}
+
+{% block content %}
+<h2>
+
+  {% if marca %}
+    hay datos!!
+  {% endif %}
+
+</h2>
+
+<p>
+  {{ name }}
+</p>
+
+<ul>
+{% for m in marca %}
+  <ul>
+    <li>
+      {{m.id}} / {{m.brand}}
+    </li>
+{% endfor %}
+</ul>
+{% endblock content %}

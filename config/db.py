@@ -4,8 +4,11 @@ POSTGRESQL = {
     'ENGINE': 'django.db.backends.postgresql',
     'NAME': 'smartHunt2',
     'USER': 'postgres',
-    'PASSWORD': 'Tecnico+123',
+    'PASSWORD': 'tecnico',
     'HOST': 'localhost',
-    'PORT': '5432'
+    'PORT': '5432',
+    'OPTIONS': {
+      'client_encoding': 'UTF8',
+    }
   }
 }
