@@ -252,7 +252,7 @@ class Monitor(models.Model):
     return f'Marca: {self.model.brand}, Modelo: {self.model}, S/N°: {self.serial_num}'
 
   class Meta:
-    verbose_name = 'Monitor'
-    verbose_name_plural = 'Monitores'
-    db_table = 'monitores'
+    verbose_name = 'Computadora'
+    verbose_name_plural = 'Computadoras'
+    db_table = 'computadoras'
     ordering = ['id']

@@ -194,7 +194,7 @@ class ImgPrinterDevice(models.Model):
   connection_type = models.CharField(max_length = 3, choices = CONNECTION_TYPE_CHOICES, default = RED, verbose_name = 'Tipo de Conexion' )
   tech = models.ForeignKey(Techs, related_name = 'img_printer_tech', verbose_name = 'Técnico', on_delete = models.CASCADE)
   model = models.ForeignKey(Model, related_name = 'img_printer_model', verbose_name = 'Modelo', on_delete = models.CASCADE)
-  serial_p = models.CharField(max_length = 20, verbose_name = 'Número de Serie')
+  serial_n = models.CharField(max_length = 20, verbose_name = 'Número de Serie')
   employee = models.ForeignKey(Employee, related_name = 'img_printer_employee', verbose_name = 'Empleado', on_delete = models.CASCADE)
   date_creation = models.DateTimeField(auto_now = True, verbose_name = 'Fecha de Registro')
   date_updated = models.DateTimeField(auto_now_add = True, verbose_name = 'Última Modificación')
@@ -203,7 +203,7 @@ class ImgPrinterDevice(models.Model):
     return self.serial_n
 
   def computer_data(self):
-    return f'Marca: {self.model.brand}, Ip: {self.ip}, Modelo: {self.model} S/N°: {self.serial_n}'
+    return f'Ip: {self.ip}, Modelo: {self.model} S/N°: {self.serial_n}'
 
   class Meta:
     verbose_name = 'Impresor y Scanner'
@@ -217,7 +217,7 @@ class Computer(models.Model):
   last_review = models.DateField(verbose_name = 'Última Revision')
   tech = models.ForeignKey(Techs, related_name = 'computer_tech', verbose_name = 'Técnico', on_delete = models.CASCADE)
   model = models.ForeignKey(Model, related_name = 'computer_model', verbose_name = 'Modelo', on_delete = models.CASCADE)
-  serial_c = models.CharField(max_length = 20, verbose_name = 'Número de Serie')
+  serial_num = models.CharField(max_length = 20, verbose_name = 'Número de Serie')
   employee = models.ForeignKey(Employee, related_name = 'computer_employee', verbose_name = 'Empleado', on_delete = models.CASCADE)
   printer = models.ManyToManyField(ImgPrinterDevice, related_name='computers', verbose_name='Impresoras')
   date_creation = models.DateTimeField(auto_now = True, verbose_name = 'Fecha de Registro')
@@ -227,32 +227,10 @@ class Computer(models.Model):
     return self.pc_net_name
 
   def computer_data(self):
-    return f'Marca: {self.model.brand}, Ip: {self.ip}, Nombre Pc: {self.pc_net_name}, Modelo: {self.model}, S/N°: {self.serial_num}'
+    return f'Ip: {self.ip}, Nombre Pc: {self.pc_net_name}, Modelo: {self.model}, S/N°: {self.serial_num}'
 
   class Meta:
     verbose_name = 'Computadora'
     verbose_name_plural = 'Computadoras'
     db_table = 'computadoras'
-    ordering = ['id']
-
-class Monitor(models.Model):
-  operational = models.BooleanField(default=1)
-  computer_assigned = models.ForeignKey(Computer, related_name = 'monitor_computer', verbose_name = 'Computadora Asignada', on_delete = models.CASCADE, null = True, blank = True)
-  last_review = models.DateField(verbose_name = 'Última Revision')
-  tech = models.ForeignKey(Techs, related_name = 'monitor_tech', verbose_name = 'Técnico', on_delete = models.CASCADE)
-  model = models.ForeignKey(Model, related_name = 'monitor_model', verbose_name = 'Modelo', on_delete = models.CASCADE)
-  serial_m = models.CharField(max_length = 20, verbose_name = 'Número de Serie')
-  date_creation = models.DateTimeField(auto_now = True, verbose_name = 'Fecha de Registro')
-  date_updated = models.DateTimeField(auto_now_add = True, verbose_name = 'Última Modificación')
-
-  def __str__(self):
-    return self.serial_m
-
-  def monitor_data(self):
-    return f'Marca: {self.model.brand}, Modelo: {self.model}, S/N°: {self.serial_num}'
-
-  class Meta:
-    verbose_name = 'Monitor'
-    verbose_name_plural = 'Monitores'
-    db_table = 'monitores'
     ordering = ['id']

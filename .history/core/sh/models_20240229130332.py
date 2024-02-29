@@ -239,8 +239,8 @@ class Monitor(models.Model):
   operational = models.BooleanField(default=1)
   computer_assigned = models.ForeignKey(Computer, related_name = 'monitor_computer', verbose_name = 'Computadora Asignada', on_delete = models.CASCADE, null = True, blank = True)
   last_review = models.DateField(verbose_name = 'Última Revision')
-  tech = models.ForeignKey(Techs, related_name = 'monitor_tech', verbose_name = 'Técnico', on_delete = models.CASCADE)
-  model = models.ForeignKey(Model, related_name = 'monitor_model', verbose_name = 'Modelo', on_delete = models.CASCADE)
+  tech = models.ForeignKey(Techs, related_name = 'computer_tech', verbose_name = 'Técnico', on_delete = models.CASCADE)
+  model = models.ForeignKey(Model, related_name = 'computer_model', verbose_name = 'Modelo', on_delete = models.CASCADE)
   serial_m = models.CharField(max_length = 20, verbose_name = 'Número de Serie')
   date_creation = models.DateTimeField(auto_now = True, verbose_name = 'Fecha de Registro')
   date_updated = models.DateTimeField(auto_now_add = True, verbose_name = 'Última Modificación')
@@ -252,7 +252,7 @@ class Monitor(models.Model):
     return f'Marca: {self.model.brand}, Modelo: {self.model}, S/N°: {self.serial_num}'
 
   class Meta:
-    verbose_name = 'Monitor'
-    verbose_name_plural = 'Monitores'
-    db_table = 'monitores'
+    verbose_name = 'Computadora'
+    verbose_name_plural = 'Computadoras'
+    db_table = 'computadoras'
     ordering = ['id']
