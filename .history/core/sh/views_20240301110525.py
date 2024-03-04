@@ -20,4 +20,4 @@ def my_second_view(request):
     'marca': Brand.objects.all()
   }
 
-  return render(request, 'index.html', data)
+  return render(request, 'second.html', data)
