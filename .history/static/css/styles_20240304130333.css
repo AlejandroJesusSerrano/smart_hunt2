@@ -1,0 +1,36 @@
+* {
+  padding: 0;
+  margin:0;
+}
+
+a {
+  text-decoration: none;
+  font-size: 17px;
+}
+
+p {
+  font-size: 17px;
+}
+
+a:hover {
+  color:#0dcaf0 !important;
+}
+
+i {
+  font-size: 25px;
+}
+
+footer {
+  position: relative;
+  bottom: 0;
+  width: 100%;
+}
+.content-wrapper {
+  min-height: 43vh;
+}
+
+/* footer {
+  position: relative;
+  bottom: 0;
+  width: 100%;
+} */
