@@ -55,7 +55,7 @@ class Techs(models.Model):
   date_updated = models.DateTimeField(auto_now_add = True, verbose_name = 'Última Modificación')
 
   def __str__(self):
-    return self.name
+    return f'{self.last_name}, {self.name}'
 
   class Meta:
     verbose_name = 'Tecnico'
@@ -115,7 +115,7 @@ class Edifice(models.Model):
   date_updated = models.DateTimeField(auto_now_add = True, verbose_name = 'Última Modificación')
 
   def __str__(self):
-    return self.edifice
+    return  f'{self.edifice} - {self.address} - {self.location.location} / {self.location.province.province}'
 
   class Meta:
     verbose_name = 'Edificio'
@@ -168,7 +168,7 @@ class Employee(models.Model):
   date_updated = models.DateTimeField(auto_now_add = True, verbose_name = 'Última Modificación')
 
   def __str__(self):
-    return self.employee_last_name
+    return f'{self.employee_last_name}, {self.employee_name} - {self.cuil} - {self.office.office} - {self.status}'
 
   def employee_full_name(self):
     return f'{self.employee_last_name}, {self.employee_name}'
@@ -200,7 +200,7 @@ class ImgPrinterDevice(models.Model):
   date_updated = models.DateTimeField(auto_now_add = True, verbose_name = 'Última Modificación')
 
   def __str__(self):
-    return self.serial_p
+    return f'{self.model.brand.brand} - {self.model.model} - {self.serial_p} - {self.ip}'
 
   def computer_data(self):
     return f'Marca: {self.model.brand}, Ip: {self.ip}, Modelo: {self.model} S/N°: {self.serial_n}'
@@ -224,7 +224,7 @@ class Computer(models.Model):
   date_updated = models.DateTimeField(auto_now_add = True, verbose_name = 'Última Modificación')
 
   def __str__(self):
-    return self.pc_net_name
+    return f'{self.model.brand.brand} - {self.model.model} - {self.serial_c} - {self.ip} - {self.pc_net_name} - {self.employee.employee_last_name}, {self.employee.employee_name}'
 
   def computer_data(self):
     return f'Marca: {self.model.brand}, Ip: {self.ip}, Nombre Pc: {self.pc_net_name}, Modelo: {self.model}, S/N°: {self.serial_num}'
@@ -246,7 +246,7 @@ class Monitor(models.Model):
   date_updated = models.DateTimeField(auto_now_add = True, verbose_name = 'Última Modificación')
 
   def __str__(self):
-    return self.serial_m
+    return f'{self.model.brand.brand} - {self.model.model} - {self.computer_assigned}'
 
   def monitor_data(self):
     return f'Marca: {self.model.brand}, Modelo: {self.model}, S/N°: {self.serial_num}'

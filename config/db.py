@@ -6,9 +6,9 @@ POSTGRESQL = {
     'USER': 'postgres',
 
     #!EN CASA:
-    # 'PASSWORD': 'tecnico',
+    'PASSWORD': 'tecnico',
     #!EN TRABAJO:
-    'PASSWORD': 'Tecnico+123',
+    # 'PASSWORD': 'Tecnico+123',
 
     'HOST': 'localhost',
     'PORT': '5432',
