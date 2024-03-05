@@ -1,0 +1,21 @@
+{% extends 'home.html' %}
+{% block body %}
+<body>
+  <div class="wrapper">
+
+    {% include 'navbar.html' %}
+
+    <div class="content-wrapper">
+      {% block content %}
+
+      {% endblock content %}
+    </div>
+
+    {% include 'footer.html' %}
+  </div>
+  <script src={% static 'lib/bootstrap_5.3.3/js/bootstrap.bundle.min.js' %}></script>
+  {% block js %}
+
+  {% endblock js %}
+  </body>
+{% endblock body %}

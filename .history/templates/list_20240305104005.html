@@ -1,0 +1,35 @@
+
+{% extends 'body.html' %}
+
+{% load static %}
+
+{% block content %}
+
+  <h3 class="display-3 text-center my-3">{{title}}</h3>
+
+
+  <div class="card mx-auto mb-5" style="width: 75rem;">
+
+    <div class="card-body">
+      <table class="table table-striped">
+        <thead>
+          {% block columns %}
+
+          {% endblock columns %}
+        </thead>
+        <tbody>
+          {% block rows %}
+
+          {% endblock rows %}
+
+        </tbody>
+      </table>
+    </div>
+    <div class="card-footer">
+      {% block add_btn %}
+
+      {% endblock add_btn %}
+    </div>
+  </div>
+
+{% endblock content %}

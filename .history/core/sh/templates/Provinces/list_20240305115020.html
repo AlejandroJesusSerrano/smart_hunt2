@@ -1,0 +1,32 @@
+{% extends 'list.html' %}
+
+{% block columns %}
+<tr>
+  <th scope="col" style="width: 5%">ID</th>
+  <th scope="col" style="width: 8%">N° Distrito</th>
+  <th scope="col" style="width: fit-content;">Provincia</th>
+  <th scope="col" style="width: fit-content;">Creado</th>
+  <th scope="col" style="width: fit-content;">Modificado</th>
+  <th scope="col" style="width: fit-content;">Opciones</th>
+</tr>
+{% endblock columns %}
+
+{% block rows %}
+  {% for p in object_list %}
+  <tr>
+    <td>{{ p.id }}</td>
+    <td>{{ p.number_id }}</td>
+    <td>{{ p.province }}</td>
+    <td>{{ p.date_creation }}</td>
+    <td>{{ p.date_updated }}</td>
+    <td>
+      <button type="button" class="btn btn-warning btn-sm" alt="Editar"><i class="bi-pen small"></i></button>
+      <button type="button" class="btn btn-danger btn-sm" alt="Borrar"><i class="bi-trash3 small"></i></button>
+    </td>
+  </tr>
+  {% endfor %}
+{% endblock rows %}
+
+{% block add_btn %}
+<button type="button" class="btn btn-info text-dark"><i class="fas fa-plus small"></i> Nuevo Registro</button>
+{% endblock add_btn %}
