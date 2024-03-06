@@ -1,5 +1,3 @@
-from django.http import HttpResponseRedirect
-from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView
 from core.sh.forms import ProvinceForm
@@ -22,15 +20,6 @@ class ProvinceCreateView(CreateView):
 
   def post(self, request, *args, **kwargs):
     print(request.POST)
-    form = ProvinceForm(request.POST)
-    if form.is_valid():
-      form.save()
-      return HttpResponseRedirect(self.success_url)
-    self.get_object = None
-    context = self.get_context_data(**kwargs)
-    context['form'] = form
-    print(form.errors)
-    return render(request, self.template_name, {'form':form})
 
   def get_context_data(self, **kwargs):
     context = super().get_context_data(**kwargs)

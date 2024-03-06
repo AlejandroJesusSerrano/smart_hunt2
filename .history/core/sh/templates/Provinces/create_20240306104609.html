@@ -1,0 +1,18 @@
+{% extends 'body.html' %}
+
+{% block content %}
+<h3 class="display-3 text-center my-3">{{title}}</h3>
+<form action="">
+  <div class="card container-sm mx-auto mb-5 col-md-12" style="width: 75rem;">
+
+    <div class="card-body">
+      
+    </div>
+    <div class="card-footer">
+      {% block add_btn %}
+
+      {% endblock add_btn %}
+    </div>
+  </div>
+</form>
+{% endblock content %}

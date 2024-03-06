@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # Libs
-    'widget_tweaks',
+    'widget_tweakscore'
     # My Apps
     'core.sh'
 ]

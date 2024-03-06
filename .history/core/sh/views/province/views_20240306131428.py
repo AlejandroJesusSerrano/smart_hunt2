@@ -24,13 +24,11 @@ class ProvinceCreateView(CreateView):
     print(request.POST)
     form = ProvinceForm(request.POST)
     if form.is_valid():
-      form.save()
       return HttpResponseRedirect(self.success_url)
-    self.get_object = None
     context = self.get_context_data(**kwargs)
     context['form'] = form
-    print(form.errors)
     return render(request, self.template_name, {'form':form})
+    print(form.errors)
 
   def get_context_data(self, **kwargs):
     context = super().get_context_data(**kwargs)
