@@ -2,3 +2,5 @@
 db.py
 # ignore pycache
 __pycache__
+#  ignore history
+.history
