@@ -1,4 +1,0 @@
-# ignore database
-db.py
-# ignore pycache
-__pycache__
