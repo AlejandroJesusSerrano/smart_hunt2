@@ -1,0 +1,42 @@
+{% extends 'body.html' %}
+{% load widget_tweaks %}
+
+{% block content %}
+<h3 class="display-3 text-center my-3">{{title}}</h3>
+<div class="card container-sm mx-auto px-0 mb-5 col-md-12" style="width: 75rem;">
+  <form method="post" action=".">
+    {% csrf_token %}
+      {% for field in form.visible_fields  %}
+      <div class="card-body">
+        <div class="form-group">
+          <label for="" class="display-6">{{field.label}}</label>
+          {{ field|add_class:'form-control' }}
+        </div>
+      </div>
+      {% endfor %}
+
+      {% if form.errors %}
+      <div class="alert alert-danger alert-dismissible">
+        <button type="button" class="btn-close" data-dismiss="alert" aria-hidden="true"></button>
+        <h5 class="display-6"><i class="icon fas fa-ban"></i> ¡Se ha producido un error al intentar guardar el registro!</h5>
+        <ul>
+        {% for field in form %}
+          {% for error in field.errors  %}
+            <li>{{error}}</li>
+          {% endfor %}
+        {% endfor %}
+      </ul>
+      </div>
+      {% endif %}
+
+      <div class="card-footer border-0">
+        {% block add_btn %}
+        <button type="submit" class="btn btn-primary">
+          <i class="fas fa-save small"></i> Guardar Provincia
+        </button>
+        {% endblock add_btn %}
+      </div>
+  </form>
+</div>
+
+{% endblock content %}

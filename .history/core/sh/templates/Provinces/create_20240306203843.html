@@ -1,0 +1,46 @@
+{% extends 'body.html' %}
+{% load widget_tweaks %}
+
+{% block content %}
+<h3 class="display-3 text-center my-3">{{title}}</h3>
+<div class="card container-sm mx-auto px-0 mb-5 col-md-12" style="width: 75rem;">
+  <form method="post" action=".">
+    {% csrf_token %}
+      {% for field in form.visible_fields  %}
+      <div class="card-body">
+        <div class="form-group">
+          <label for="" class="display-6">{{field.label}}</label>
+          {{ field|add_class:'form-control' }}
+        </div>
+      </div>
+      {% endfor %}
+
+      <div class="card-footer border-0">
+        {% block add_btn %}
+        <button type="submit" class="btn btn-primary">
+          <i class="fas fa-save small"></i> Guardar Provincia
+        </button>
+        {% endblock add_btn %}
+      </div>
+  </form>
+</div>
+<script>
+  {% if form.errors %}
+    let errors = '';
+      {% for field in form %}
+        {% for error in field.errors  %}
+          errors+='{{error}}\n';
+        {% endfor %}
+      {% endfor %}
+      Swal.fire({
+        title: 'Error!',
+        text: 'Do you want to continue',
+        icon: 'error',
+        confirmButtonText: 'Cool'
+  })
+    {% endif %}
+
+
+</script>
+
+{% endblock content %}

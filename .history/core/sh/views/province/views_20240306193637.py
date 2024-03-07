@@ -12,7 +12,6 @@ class ProvinceListView(ListView):
   def get_context_data(self, **kwargs):
     context = super().get_context_data(**kwargs)
     context['title'] = 'Listado de Provincias'
-    context['create_url'] = reverse_lazy('sh:province_add')
     return context
 
 class ProvinceCreateView(CreateView):

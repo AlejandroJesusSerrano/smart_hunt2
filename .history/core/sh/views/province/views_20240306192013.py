@@ -12,7 +12,6 @@ class ProvinceListView(ListView):
   def get_context_data(self, **kwargs):
     context = super().get_context_data(**kwargs)
     context['title'] = 'Listado de Provincias'
-    context['create_url'] = reverse_lazy('sh:province_add')
     return context
 
 class ProvinceCreateView(CreateView):
@@ -25,12 +24,9 @@ class ProvinceCreateView(CreateView):
       print(request.POST)
       form = ProvinceForm(request.POST)
       if form.is_valid():
-        form.save()
         return HttpResponseRedirect(self.success_url)
-      self.object = None
-      context = self.get_context_data(**kwargs)
-      context['form'] = form
-      return render(request, self.template_name, context)
+      print(form.errors)
+      # return super().post(request, *args, **kwargs)
 
   def get_context_data(self, **kwargs):
     context = super().get_context_data(**kwargs)
