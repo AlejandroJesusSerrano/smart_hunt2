@@ -1,49 +1,66 @@
 {% extends 'body.html' %}
 {% load widget_tweaks %}
 
+{% block bradcrumb %}
+<div class="col-12 px-4 my-2">
+  <ol class="breadcrumb float-sm-end">
+    <li class="breadcrumb-item"><a href="{% url 'sh:province_list' %}">{{prev}}</a></li>
+    <li class="breadcrumb-item active">{{title}}</li>
+  </ol>
+</div>
+{% endblock bradcrumb %}
+
 {% block content %}
 <h3 class="display-3 text-center my-3">{{title}}</h3>
+
 <div class="card container-sm mx-auto px-0 mb-5 col-md-12" style="width: 75rem;">
   <form method="post" action=".">
+
     {% csrf_token %}
+
       {% for field in form.visible_fields  %}
+
       <div class="card-body">
         <div class="form-group">
           <label for="" class="display-6">{{field.label}}</label>
           {{ field|add_class:'form-control' }}
         </div>
       </div>
+
       {% endfor %}
 
+      {% if form.errors %}
+
+      <div class="alert bg-danger border-0 text-light">
+      <h5 class="display-6"><i class="fas fa fa-triangle-exclamation"></i> ¡Se ha producido un error al intentar guardar el registro!</h5>
+      <ul>
+
+        {% for field in form %}
+
+        {% for error in field.errors %}
+
+        <li>{{ error }}</li>
+
+        {% endfor %}
+
+      {% endfor %}
+
+    </ul>
+
+      </div>
+
+      {% endif %}
+
       <div class="card-footer border-0">
-        {% block add_btn %}
+
+        {% block end_form_btns %}
+        <a href="javascript:history.back()" class="btn btn-danger"><i class="fas fa-arrow-left small"></i> Regresar</a>
         <button type="submit" class="btn btn-primary">
           <i class="fas fa-save small"></i> Guardar Provincia
         </button>
-        {% endblock add_btn %}
+        {% endblock end_form_btns %}
+
       </div>
   </form>
 </div>
-<script>
-  const swalBootstrapButtons = Swal.mixin({
-    customClass: {
-      confirmButton: 'btn btn-danger'
-    },
-    buttonStyling: false
-  });
-  {% if form.errors %}
-    let errors = '';
-    {% for field in form %}
-      {% for error in field.errors  %}
-        errors+='{{ error }}\n';
-      {% endfor %}
-    {% endfor %}
-    swalBootstrapButtons.fire({
-      title: 'Error!',
-      text: errors,
-      icon: 'error',
-      confirmButtonText: 'OK',
-    });
-  {% endif %}
-</script>
 {% endblock content %}

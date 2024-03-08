@@ -7,12 +7,23 @@
   <script src={% static 'lib/datatables_2.0.1/datatables.min.js' %}></script>
 {% endblock head %}
 
+{% block bradcrumb %}
+
+<div class="col-12 px-4 my-2">
+  <ol class="breadcrumb float-sm-end">
+    <li class="breadcrumb-item"><a href="#"><i class="bi-house small"></i> {{prev}}</a></li>
+    <li class="breadcrumb-item active">{{title}}</li>
+  </ol>
+</div>
+
+{% endblock bradcrumb %}
+
 {% block content %}
+<div class="px-auto mx-auto col-12">
+  <h3 class="display-3 text-center mx-auto my-3">{{title}}</h3>
+</div>
 
-  <h3 class="display-3 text-center my-3">{{title}}</h3>
-
-
-  <div class="card container-sm mx-auto mb-5 col-md-12" style="width: 75rem;">
+  <div class="card container-sm mx-auto mb-5 col-md-12 p-0" style="width: 75rem;">
 
     <div class="card-body">
       <table class="table table-striped text-sm-start" id="data">
@@ -30,9 +41,9 @@
       </table>
     </div>
     <div class="card-footer border-0">
-      {% block add_btn %}
+      {% block end_list_btns %}
 
-      {% endblock add_btn %}
+      {% endblock end_list_btns %}
     </div>
   </div>
 
