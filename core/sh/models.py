@@ -196,14 +196,16 @@ class ImgPrinterDevice(models.Model):
   model = models.ForeignKey(Model, related_name = 'img_printer_model', verbose_name = 'Modelo', on_delete = models.CASCADE)
   serial_p = models.CharField(max_length = 20, verbose_name = 'Número de Serie')
   employee = models.ForeignKey(Employee, related_name = 'img_printer_employee', verbose_name = 'Empleado', on_delete = models.CASCADE)
+  active = models.BooleanField(default=1)
+  operational = models.BooleanField(default=1)
   date_creation = models.DateTimeField(auto_now = True, verbose_name = 'Fecha de Registro')
   date_updated = models.DateTimeField(auto_now_add = True, verbose_name = 'Última Modificación')
 
   def __str__(self):
-    return f'{self.model.brand.brand} - {self.model.model} - {self.serial_p} - {self.ip}'
+    return f'{self.model.dev_type} - {self.brand.brand} - {self.model.model} - {self.serial_p} - {self.ip}'
 
   def computer_data(self):
-    return f'Marca: {self.model.brand}, Ip: {self.ip}, Modelo: {self.model} S/N°: {self.serial_n}'
+    return f'Marca: {self.model.brand}, Ip: {self.ip}, Modelo: {self.model.model} S/N°: {self.serial_p}'
 
   class Meta:
     verbose_name = 'Impresor y Scanner'
@@ -220,6 +222,8 @@ class Computer(models.Model):
   serial_c = models.CharField(max_length = 20, verbose_name = 'Número de Serie')
   employee = models.ForeignKey(Employee, related_name = 'computer_employee', verbose_name = 'Empleado', on_delete = models.CASCADE)
   printer = models.ManyToManyField(ImgPrinterDevice, related_name='computers', verbose_name='Impresoras')
+  operational = models.BooleanField(default=1)
+  active = models.BooleanField(default=1)
   date_creation = models.DateTimeField(auto_now = True, verbose_name = 'Fecha de Registro')
   date_updated = models.DateTimeField(auto_now_add = True, verbose_name = 'Última Modificación')
 
@@ -227,7 +231,7 @@ class Computer(models.Model):
     return f'{self.model.brand.brand} - {self.model.model} - {self.serial_c} - {self.ip} - {self.pc_net_name} - {self.employee.employee_last_name}, {self.employee.employee_name}'
 
   def computer_data(self):
-    return f'Marca: {self.model.brand}, Ip: {self.ip}, Nombre Pc: {self.pc_net_name}, Modelo: {self.model}, S/N°: {self.serial_num}'
+    return f'Marca: {self.model.brand}, Ip: {self.ip}, Nombre Pc: {self.pc_net_name}, Modelo: {self.model.model}, S/N°: {self.serial_c}'
 
   class Meta:
     verbose_name = 'Computadora'
@@ -237,6 +241,7 @@ class Computer(models.Model):
 
 class Monitor(models.Model):
   operational = models.BooleanField(default=1)
+  active = models.BooleanField(default=1)
   computer_assigned = models.ForeignKey(Computer, related_name = 'monitor_computer', verbose_name = 'Computadora Asignada', on_delete = models.CASCADE, null = True, blank = True)
   last_review = models.DateField(verbose_name = 'Última Revision')
   tech = models.ForeignKey(Techs, related_name = 'monitor_tech', verbose_name = 'Técnico', on_delete = models.CASCADE)
@@ -249,10 +254,33 @@ class Monitor(models.Model):
     return f'{self.model.brand.brand} - {self.model.model} - {self.computer_assigned}'
 
   def monitor_data(self):
-    return f'Marca: {self.model.brand}, Modelo: {self.model}, S/N°: {self.serial_num}'
+    return f'Marca: {self.model.brand}, Modelo: {self.model.model}, S/N°: {self.serial_m}'
 
   class Meta:
     verbose_name = 'Monitor'
     verbose_name_plural = 'Monitores'
     db_table = 'monitores'
     ordering = ['id']
+
+class Peripherals(models.Model):
+  operational = models.BooleanField(default=1)
+  active = models.BooleanField(default=1)
+  computer_assigned = models.ForeignKey(Computer, related_name = 'peripherals_computer', verbose_name = 'Computadora Asignada', on_delete = models.CASCADE, null = True, blank = True)
+  last_review = models.DateField(verbose_name = 'Última Revision')
+  model = models.ForeignKey(Model, related_name = 'peripherals_model', verbose_name = 'Modelo', on_delete = models.CASCADE)
+  serial_per = models.CharField(max_length = 20, verbose_name = 'Número de Serie')
+  date_creation = models.DateTimeField(auto_now = True, verbose_name = 'Fecha de Registro')
+  date_updated = models.DateTimeField(auto_now_add = True, verbose_name = 'Última Modificación')
+
+  def __str__(self):
+    return f'{self.model.dev_type} - {self.model.brand.brand} - {self.model.model} - {self.serial_k} - {self.computer_assigned}'
+
+  def monitor_data(self):
+    return f'Marca: {self.model.brand}, Modelo: {self.model.model}, S/N°: {self.serial_k}'
+
+  class Meta:
+    verbose_name = 'Periferico'
+    verbose_name_plural = 'Perifericos'
+    db_table = 'perifericos'
+    ordering = ['id']
+
