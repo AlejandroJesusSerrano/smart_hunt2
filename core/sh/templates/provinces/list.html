@@ -21,7 +21,7 @@
     <td class="text-center">{{ p.date_updated }}</td>
     <td class="text-center">
       <a href="{% url 'sh:province_edit' p.id %}" class="btn btn-warning btn-sm" alt="Editar"><i class="bi-pen small"></i></a>
-      <button type="button" class="btn btn-danger btn-sm" alt="Borrar"><i class="bi-trash3 small"></i></button>
+      <a href="{% url 'sh:province_delete' p.id %}" class="btn btn-danger btn-sm" alt="Borrar"><i class="bi-trash3 small"></i></a>
     </td>
   </tr>
   {% endfor %}

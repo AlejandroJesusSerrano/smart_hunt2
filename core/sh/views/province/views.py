@@ -1,7 +1,7 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse_lazy
-from django.views.generic import ListView, CreateView, UpdateView
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from core.sh.forms import ProvinceForm
 from core.sh.models import Province
 
@@ -51,4 +51,21 @@ class ProvinceUpdateView(UpdateView):
     context['entity'] = 'Provincias'
     context['list_url'] = reverse_lazy('sh:province_list')
     context['action'] = 'edit'
+    context['prev'] = 'Listado de Provincias'
+    context['title'] = 'Agregar Provincia'
+    return context
+
+class ProvinceDeleteView(DeleteView):
+  model = Province
+  template_name = 'provinces/delete.html'
+  success_url = reverse_lazy('sh:province_list')
+
+  def get_context_data(self, **kwargs):
+    context = super().get_context_data(**kwargs)
+    context['title'] = 'Eliminar Provincia'
+    context['entity'] = 'Provincias'
+    context['list_url'] = reverse_lazy('sh:province_list')
+    context['action'] = 'delete'
+    context['prev'] = 'Listado de Provincias'
+    context['title'] = 'Agregar Provincia'
     return context

@@ -1,0 +1,43 @@
+{% extends 'body.html' %}
+{% load widget_tweaks %}
+
+{% block bradcrumb %}
+<div class="col-12 px-4 my-2">
+  <ol class="breadcrumb float-sm-end">
+    <li class="breadcrumb-item"><a href="{% url 'sh:province_list' %}">{{prev}}</a></li>
+    <li class="breadcrumb-item active">{{title}}</li>
+  </ol>
+</div>
+{% endblock bradcrumb %}
+
+{% block content %}
+<h3 class="display-3 text-center my-3">{{title}}</h3>
+
+<div class="card container-sm mx-auto px-0 mb-5 col-md-12" style="width: 75rem;">
+  <form method="post" action=".">
+  {% csrf_token %}
+        <div class="alert alert-danger alert-dismissible border-0 rounded-0">
+        <h5 class="display-6"><i class="bi-trash3-fill"></i> ¡Notificación!</h5>
+        {% block alert_text %}
+
+        {% endblock alert_text %}
+        <p>¿Deseas Continuar?</p>
+      </div>
+
+
+      <div class="card-body border-0">
+
+        {% block end_form_btns %}
+        <button type="submit" class="btn btn-danger">
+          <i class="fas fa-check small"></i> Si, aceptar
+        </button>
+
+        <a href="{{ list_url }}" class="btn btn-success"><i class="fa-solid fa-xmark small"></i> No, Cancelar</a>
+
+        <a href="javascript:history.back()" class="btn btn-primary"><i class="fas fa-arrow-left small"></i> Regresar</a>
+        {% endblock end_form_btns %}
+
+      </div>
+  </form>
+</div>
+{% endblock content %}
