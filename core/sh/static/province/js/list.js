@@ -1,5 +1,5 @@
-$(function(){
-console.log('executing... datatables.ajax.script')
+$(function () {
+
   $('#data').DataTable({
     responsive: true,
     autoWidth: false,
@@ -9,7 +9,7 @@ console.log('executing... datatables.ajax.script')
     url: '/static/lib/datatables_2.0.1/spanish.json'
     },
     ajax: {
-      url: '/sh/province/list/',
+      url: windows.location.pathname,
       type: 'POST',
       data: {
         'action':'searchdata'

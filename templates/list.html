@@ -55,37 +55,17 @@
 
 {% block js %}
   <script type="application/javascript">
-    $(document).ready(function() {
-  $('#data').DataTable({
-    responsive: true,
-    autoWidth: false,
-    destroy: true,
-    deferRender: true,
-    ajax: {
-      url: window.location.pathname,
-      type: 'POST',
-      data: {
-        'action': 'searchdata'
+    console.log('cargando DataTable')
+    let table = new DataTable('#data', {
+      responsive: {
+        details: {
+          type:'column'
+        }
       },
-      dataSrc: ""
-    },
-    columns: [
-      { 'data': 'id' },
-      { 'data': 'number_id' },
-      { 'data': 'province' },
-    ],
-  });
-});
-    // let table = new DataTable('#data', {
-    //   responsive: {
-    //     details: {
-    //       type:'column'
-    //     }
-    //   },
-    //   autoWidth: false,
-    //   language: {
-    //     url:"{% static 'lib/datatables_2.0.1/spanish.json' %}"
-    //   }
-    // });
+      autoWidth: false,
+      language: {
+        url:"{% static 'lib/datatables_2.0.1/spanish.json' %}"
+      }
+    });
   </script>
 {% endblock js %}
