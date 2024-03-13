@@ -1,5 +1,11 @@
 {% extends 'list.html' %}
 
+{% load static %}
+
+{% block head_list %}
+  <script src="{% static 'province/js/list.js' %}"></script>
+{% endblock head_list %}
+
 {% block columns %}
 <tr>
   <th scope="col" style="width: 5%" class="text-center">ID</th>
@@ -12,19 +18,7 @@
 {% endblock columns %}
 
 {% block rows %}
-  {% for p in object_list %}
-  <tr>
-    <td class="text-center">{{ p.id }}</td>
-    <td class="text-center">{{ p.number_id }}</td>
-    <td class="text-center">{{ p.province }}</td>
-    <td class="text-center">{{ p.date_creation }}</td>
-    <td class="text-center">{{ p.date_updated }}</td>
-    <td class="text-center">
-      <a href="{% url 'sh:province_edit' p.id %}" class="btn btn-warning btn-sm" alt="Editar"><i class="bi-pen small"></i></a>
-      <a href="{% url 'sh:province_delete' p.id %}" class="btn btn-danger btn-sm" alt="Borrar"><i class="bi-trash3 small"></i></a>
-    </td>
-  </tr>
-  {% endfor %}
+
 {% endblock rows %}
 
 {% block end_list_btns %}
@@ -32,3 +26,7 @@
 <a href="{{ create_url }}" class="btn btn-primary"><i class="fas fa-plus small"></i> Nuevo Registro</a>
 
 {% endblock end_list_btns %}
+
+{% block js %}
+
+{% endblock js %}

@@ -7,6 +7,10 @@
   <script src={% static 'lib/datatables_2.0.1/datatables.min.js' %}></script>
 {% endblock head %}
 
+{% block head_list %}
+
+{% endblock head_list %}
+
 {% block bradcrumb %}
 
 <div class="col-12 px-4 my-2">
@@ -19,7 +23,7 @@
 {% endblock bradcrumb %}
 
 {% block content %}
-<div class="px-auto mx-auto col-12">
+<div class="container">
   <h3 class="display-3 text-center mx-auto my-3">{{title}}</h3>
 </div>
 
@@ -51,16 +55,37 @@
 
 {% block js %}
   <script type="application/javascript">
-    let table = new DataTable('#data', {
-      responsive: {
-        details: {
-          type:'column'
-        }
+    $(document).ready(function() {
+  $('#data').DataTable({
+    responsive: true,
+    autoWidth: false,
+    destroy: true,
+    deferRender: true,
+    ajax: {
+      url: window.location.pathname,
+      type: 'POST',
+      data: {
+        'action': 'searchdata'
       },
-      autoWidth: false,
-      language: {
-        url:"{% static 'lib/datatables_2.0.1/spanish.json' %}"
-      }
-    });
+      dataSrc: ""
+    },
+    columns: [
+      { 'data': 'id' },
+      { 'data': 'number_id' },
+      { 'data': 'province' },
+    ],
+  });
+});
+    // let table = new DataTable('#data', {
+    //   responsive: {
+    //     details: {
+    //       type:'column'
+    //     }
+    //   },
+    //   autoWidth: false,
+    //   language: {
+    //     url:"{% static 'lib/datatables_2.0.1/spanish.json' %}"
+    //   }
+    // });
   </script>
 {% endblock js %}

@@ -1,6 +1,8 @@
 from django.db import models
 from datetime import datetime
 
+from django.forms import model_to_dict
+
 # Create your models here.
 class Brand(models.Model):
   brand = models.CharField(max_length=50, verbose_name = 'Marca')
@@ -71,6 +73,10 @@ class Province(models.Model):
 
   def __str__(self):
     return self.province
+
+  def toJSON(self):
+    item = model_to_dict(self)
+    return item
 
   class Meta:
     verbose_name = 'Provincia'
