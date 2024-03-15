@@ -208,7 +208,7 @@ class ImgPrinterDevice(models.Model):
   date_updated = models.DateTimeField(auto_now_add = True, verbose_name = 'Última Modificación')
 
   def __str__(self):
-    return f'{self.model.dev_type} - {self.brand.brand} - {self.model.model} - {self.serial_p} - {self.ip}'
+    return f'{self.model.dev_type} - {self.model.brand} - {self.model.model} - {self.serial_p} - {self.ip}'
 
   def computer_data(self):
     return f'Marca: {self.model.brand}, Ip: {self.ip}, Modelo: {self.model.model} S/N°: {self.serial_p}'
